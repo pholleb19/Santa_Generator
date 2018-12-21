@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 
 import static java.awt.Desktop.getDesktop;
 
-public class DoublyLinkedList implements Iterable<String>{
+public class DoublyLinkedList implements Iterable<ListNode2>{
     private ListNode2 head;
     private ListNode2 tail;
     private int size;
@@ -77,8 +77,8 @@ public class DoublyLinkedList implements Iterable<String>{
     public void generateSantas() {
         try{
 
-            ArrayList<String> copy = new ArrayList<String>();
-            for(String s: this){
+            ArrayList<ListNode2> copy = new ArrayList<ListNode2>();
+            for(ListNode2 s: this){
                 copy.add(s);
             }
             DoublyLinkedList copyl = new DoublyLinkedList();
@@ -86,7 +86,7 @@ public class DoublyLinkedList implements Iterable<String>{
             while(!copy.isEmpty()){
                 Random rand = new Random();
                 int r = rand.nextInt(copy.size());
-                ListNode2 temp = new ListNode2(copy.remove(r));
+                ListNode2 temp = copy.remove(r);
                 copyl.add(temp);
 
                 //writer.println(curr.getValue() + " gives to " + copy.remove(r));
@@ -120,6 +120,7 @@ public class DoublyLinkedList implements Iterable<String>{
             String body = URLEncoder.encode("You are santa for " + ite.getNextNode().getValue() + " their email is " + ite.getNextNode().getEmail(), "UTF-8");
             String uriString = String.format("mailto:%s?subject=%s&body=%s", to, subject, body);
             desktop.mail(new URI(uriString));
+            ite = ite.getNextNode();
         }
         String to = URLEncoder.encode(ite.getEmail(), "UTF-8");
         String subject = URLEncoder.encode("Your Secret Santa", "UTF-8");
@@ -127,10 +128,10 @@ public class DoublyLinkedList implements Iterable<String>{
 
 
     }
-    public Iterator<String> iterator() {
+    public Iterator<ListNode2> iterator() {
         return new DoublyLinkedList.SLLIterator(head);
     }
-    private class SLLIterator implements Iterator<String> {
+    private class SLLIterator implements Iterator<ListNode2> {
         private ListNode2 nextNode;
         public SLLIterator(ListNode2 head){
             nextNode = head;
@@ -142,10 +143,10 @@ public class DoublyLinkedList implements Iterable<String>{
         }
 
         @Override
-        public String next() {
+        public ListNode2 next() {
             if (nextNode == null)
                 throw new NoSuchElementException();
-            String value = nextNode.getValue();
+            ListNode2 value = nextNode;
             nextNode = nextNode.getNextNode();
             return value;
         }
