@@ -1,0 +1,2 @@
+a gives to c
+c gives to a
