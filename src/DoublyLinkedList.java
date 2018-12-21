@@ -78,9 +78,11 @@ public class DoublyLinkedList implements Iterable<String>{
         try{
 
             ArrayList<String> copy = new ArrayList<String>();
+            
             for(String s: this){
                 copy.add(s);
             }
+
             DoublyLinkedList copyl = new DoublyLinkedList();
             PrintWriter writer = new PrintWriter("santaPairings.txt", "UTF-8");
             while(!copy.isEmpty()){

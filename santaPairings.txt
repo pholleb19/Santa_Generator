@@ -1,3 +1,4 @@
-c gives to b
-b gives to a
-a gives to c
+b gives to c
+c gives to d
+d gives to a
+a gives to b
