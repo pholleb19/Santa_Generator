@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 
 import static java.awt.Desktop.getDesktop;
 
-public class DoublyLinkedList implements Iterable<ListNode2>{
+public class DoublyLinkedList implements Iterable<String>{
     private ListNode2 head;
     private ListNode2 tail;
     private int size;
@@ -77,8 +77,8 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
     public void generateSantas() {
         try{
 
-            ArrayList<ListNode2> copy = new ArrayList<ListNode2>();
-            for(ListNode2 s: this){
+            ArrayList<String> copy = new ArrayList<String>();
+            for(String s: this){
                 copy.add(s);
             }
             DoublyLinkedList copyl = new DoublyLinkedList();
@@ -86,7 +86,7 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
             while(!copy.isEmpty()){
                 Random rand = new Random();
                 int r = rand.nextInt(copy.size());
-                ListNode2 temp = copy.remove(r);
+                ListNode2 temp = new ListNode2(copy.remove(r));
                 copyl.add(temp);
 
                 //writer.println(curr.getValue() + " gives to " + copy.remove(r));
@@ -98,7 +98,7 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
             }
             writer.println(ite.getValue() + " gives to " + copyl.getHead().getValue());
             writer.close();
-            sendEmails(copyl.getHead());
+            //sendEmails(copyl.getHead());
 
 
 
@@ -106,9 +106,9 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
         catch (IOException ex) {
 
         }
-        catch (URISyntaxException ex) {
+        //catch (URISyntaxException ex) {
 
-        }
+        //}
 
     }
     public void sendEmails(ListNode2 start) throws IOException, URISyntaxException{
@@ -128,10 +128,10 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
 
 
     }
-    public Iterator<ListNode2> iterator() {
+    public Iterator<String> iterator() {
         return new DoublyLinkedList.SLLIterator(head);
     }
-    private class SLLIterator implements Iterator<ListNode2> {
+    private class SLLIterator implements Iterator<String> {
         private ListNode2 nextNode;
         public SLLIterator(ListNode2 head){
             nextNode = head;
@@ -143,10 +143,10 @@ public class DoublyLinkedList implements Iterable<ListNode2>{
         }
 
         @Override
-        public ListNode2 next() {
+        public String next() {
             if (nextNode == null)
                 throw new NoSuchElementException();
-            ListNode2 value = nextNode;
+            String value = nextNode.getValue();
             nextNode = nextNode.getNextNode();
             return value;
         }

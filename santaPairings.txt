@@ -1,0 +1,3 @@
+c gives to b
+b gives to a
+a gives to c
