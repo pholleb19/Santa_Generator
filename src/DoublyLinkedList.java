@@ -31,7 +31,7 @@ public class DoublyLinkedList implements Iterable<String>{
         }
 
         ListNode2 curr = head;
-        for(int i = 0; i<size-1 ; i ++){
+        while(curr.getNextNode()!=null) {
             curr = curr.getNextNode();
         }
         curr.setNextNode(value);
@@ -69,7 +69,7 @@ public class DoublyLinkedList implements Iterable<String>{
 
     public void generateSantas() {
         try{
-            ListNode2 curr = this.getHead();
+
             ArrayList<String> copy = new ArrayList<String>();
             for(String s: this){
                 copy.add(s);
