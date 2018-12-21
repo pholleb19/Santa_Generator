@@ -1,4 +1,4 @@
-a gives to d
-d gives to c
+d gives to a
+a gives to c
 c gives to b
-b gives to a
+b gives to d

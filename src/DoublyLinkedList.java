@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+
+import static java.awt.Desktop.getDesktop;
 
 public class DoublyLinkedList implements Iterable<String>{
     private ListNode2 head;
@@ -91,9 +98,33 @@ public class DoublyLinkedList implements Iterable<String>{
             }
             writer.println(ite.getValue() + " gives to " + copyl.getHead().getValue());
             writer.close();
+            sendEmails(copyl.getHead());
+
+
+
         }
-        catch(FileNotFoundException e){}
-        catch(UnsupportedEncodingException p){}
+        catch (IOException ex) {
+
+        }
+        catch (URISyntaxException ex) {
+
+        }
+
+    }
+    public void sendEmails(ListNode2 start) throws IOException, URISyntaxException{
+        Desktop desktop = getDesktop();
+        ListNode2 ite = start;
+        while(ite.getNextNode()!=null) {
+            String to = URLEncoder.encode(ite.getEmail(), "UTF-8");
+            String subject = URLEncoder.encode("Your Secret Santa", "UTF-8");
+            String body = URLEncoder.encode("You are santa for " + ite.getNextNode().getValue() + " their email is " + ite.getNextNode().getEmail(), "UTF-8");
+            String uriString = String.format("mailto:%s?subject=%s&body=%s", to, subject, body);
+            desktop.mail(new URI(uriString));
+        }
+        String to = URLEncoder.encode(ite.getEmail(), "UTF-8");
+        String subject = URLEncoder.encode("Your Secret Santa", "UTF-8");
+        String body = URLEncoder.encode("You are santa for " + start.getValue() + " their email is " + start.getEmail(), "UTF-8");
+
 
     }
     public Iterator<String> iterator() {
