@@ -74,22 +74,22 @@ public class DoublyLinkedList implements Iterable<String>{
             for(String s: this){
                 copy.add(s);
             }
+            DoublyLinkedList copyl = new DoublyLinkedList();
             PrintWriter writer = new PrintWriter("santaPairings.txt", "UTF-8");
-            while(curr.getNextNode() != null){
+            while(!copy.isEmpty()){
                 Random rand = new Random();
                 int r = rand.nextInt(copy.size());
-                if(copy.get(r).equals(curr.getValue()) || copy.get(r).equals(curr.getSanta())){
-                    //System.out.println("test");
-                    return;
-                }
+                ListNode2 temp = new ListNode2(copy.remove(r));
+                copyl.add(temp);
 
-                writer.println(curr.getValue() + " gives to " + copy.remove(r));
-                curr.setSanta(copy.get(r));
-                //System.out.println(curr.getValue() + " gives to " + copy.remove(r));
-
-                curr = curr.getNextNode();
-
+                //writer.println(curr.getValue() + " gives to " + copy.remove(r));
             }
+            ListNode2 ite = copyl.getHead();
+            while(ite.getNextNode()!=null){
+                writer.println(ite.getValue() + " gives to " + ite.getNextNode().getValue());
+                ite =ite.getNextNode();
+            }
+            writer.println(ite.getValue() + " gives to " + copyl.getHead().getValue());
             writer.close();
         }
         catch(FileNotFoundException e){}

@@ -1,2 +1,2 @@
-a gives to c
-c gives to a
+d gives to a
+a gives to d
